@@ -15,7 +15,7 @@ public class StringInput {
 
     public void setValues(String str) {
         String[] values = str.split(" ");
-        if (values.length <= 2) {
+        if (values.length <= StringUtil.MINIMUM_SIZE) {
             throw new InputMismatchException("입력값 오류!");
         }
         for (int i = 0; i < values.length; i++) {
