@@ -9,12 +9,13 @@ import java.util.List;
 
 public class BaseballGame {
     private final List<Integer> computerNumbers = RandomGenerator.numbers();
-    private UserNumber userNumbers;
-    private BallStatus ballStatus;
+    private final UserNumber userNumbers;
+    private final BallStatus ballStatus;
 
     public BaseballGame() {
         this.userNumbers = new UserNumber();
         this.ballStatus = new BallStatus();
+        System.out.println(computerNumbers.get(0) + "" + computerNumbers.get(1) + computerNumbers.get(2));
     }
 
     public void setUserNumbers(String input) {
