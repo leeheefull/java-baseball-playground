@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS("+", (t, u) -> t + u),
+    PLUS("+", Integer::sum),
     SUBTRACT("-", (t, u) -> t - u),
     MULTIPLY("*", (t, u) -> t * u),
     DIVISION("/", (t, u) -> t / u);
@@ -25,7 +25,7 @@ public enum Operator {
         return Arrays.stream(values())
                 .filter(op -> op.operator.equals(inputOp))
                 .findFirst()
-                .orElseThrow(NullPointerException::new);
+                .get();
     }
 
     public static boolean isOperator(String inputOp) {
