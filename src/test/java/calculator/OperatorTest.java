@@ -44,7 +44,7 @@ public class OperatorTest {
         boolean actual = Operator.isOperator(op);
 
         // then
-        assertThat(actual).isEqualTo(true);
+        assertThat(actual).isTrue();
     }
 
     @ParameterizedTest
@@ -57,6 +57,6 @@ public class OperatorTest {
         boolean actual = Operator.isOperator(op);
 
         // then
-        assertThat(actual).isEqualTo(false);
+        assertThat(actual).isFalse();
     }
 }
