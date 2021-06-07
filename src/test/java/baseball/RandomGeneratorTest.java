@@ -14,9 +14,9 @@ public class RandomGeneratorTest {
         // given
         RandomGenerator randomGenerator = new RandomGenerator();
 
-        for (int n : RandomGenerator.numbers()) {
+        for (char c : RandomGenerator.numbers().toCharArray()) {
             // when
-            boolean isTrue = 0 < n && n < 10;
+            boolean isTrue = '0' < c && c <= '9';
             // then
             assertThat(isTrue).isEqualTo(true);
         }

@@ -1,7 +1,9 @@
 package baseball.controller;
 
 import baseball.entity.BallStatus;
+import baseball.exception.ExitException;
 import baseball.game.BaseballGame;
+import baseball.utils.BaseballConstants;
 import baseball.view.BaseballView;
 
 import java.io.BufferedReader;
@@ -10,30 +12,46 @@ import java.io.InputStreamReader;
 
 public class BaseballController {
     private final BaseballView view = new BaseballView();
-    private final BaseballGame game = new BaseballGame();
 
     public void run() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            BaseballGame game = new BaseballGame();
             while (true) {
                 String input = inputNum(br);
-                game.setUserNumbers(input);
+                game.makeUserNumber(input);
+                BallStatus ball = game.playInning();
 
-                BallStatus result = game.getResult();
-                view.showBallStatus(result);
-
-                if (result.getStrike() == 3) {
-                    view.showEnd();
-                    return;
+                if (ball.isNothing()) {
+                    view.showNothing();
                 }
-                result.clear();
+                if (!ball.isNothing()) {
+                    view.showBallStatus(ball);
+                }
+                if (ball.isEndInning()) {
+                    view.showEnd();
+                    exit(inputMenu(br));
+                    game = new BaseballGame();
+                }
+                ball.clear();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    private String inputMenu(BufferedReader br) throws IOException {
+        view.showMenu();
+        return br.readLine();
+    }
+
     private String inputNum(BufferedReader br) throws IOException {
         view.showInput();
         return br.readLine();
+    }
+
+    private void exit(String inputMenu) throws ExitException {
+        if (inputMenu.equals(BaseballConstants.END_GAME_FLAG)) {
+            throw new ExitException();
+        }
     }
 }

@@ -1,18 +1,16 @@
 package baseball.utils;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class RandomGenerator {
 
-    public static List<Integer> numbers() {
-        Set<Integer> randomNumbers = new LinkedHashSet<>();
-
-        while (randomNumbers.size() < 3) {
-            randomNumbers.add((int) (Math.random() * 9) + 1);
-        }
-        return new ArrayList<>(randomNumbers);
+    public static String numbers() {
+        return ThreadLocalRandom.current()
+                .ints(BaseballConstants.MIN_NO, BaseballConstants.MAX_NO - 1)
+                .distinct()
+                .limit(BaseballConstants.PROPER_NO)
+                .mapToObj(String::valueOf)
+                .collect(Collectors.joining());
     }
 }

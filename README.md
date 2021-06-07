@@ -10,4 +10,6 @@
 
 ## Mission 2 : Number Baseball Game
 
+![image](https://user-images.githubusercontent.com/58816862/120962680-29cb9c00-c79b-11eb-9e89-0b9974101b7c.png)
+
 ---
